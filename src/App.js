@@ -18,7 +18,7 @@ function App() {
   useEffect(() => {
     generateWordSet().then((words) => {
       setWordSet(words.wordSet);
-      setCorrectWord(words.todaysWord.toUpperCase());
+      setCorrectWord(words.todaysWord.toLocaleUpperCase('TR'));
     });
   }, []);
 
@@ -54,19 +54,19 @@ function App() {
       currentWord += board[currentAttempt.attempt][i];
     }
 
-    if (wordSet.has(currentWord.toLowerCase())) {
+    if (wordSet.has(currentWord.toLocaleLowerCase('tr'))) {
       setCurrentAttempt({attempt: currentAttempt.attempt + 1, letterPosition: 0});
     }
     else {
       alert("Word does not exists");
     }
 
-    if(currentWord == correctWord) {
+    if(currentWord === correctWord) {
       setGameOver({gameOver: true, guessedWord: true});
       return;
     }
 
-    if (currentAttempt.attempt == 5) {
+    if (currentAttempt.attempt === 5) {
       setGameOver({gameOver: true, guessedWord: false});
       return;
     }
