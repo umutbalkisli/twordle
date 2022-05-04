@@ -4,6 +4,9 @@ import Keyboard from './components/Keyboard';
 import { createContext, useEffect, useState } from 'react';
 import { boardDefault, generateWordSet } from './Words';
 import GameOver from './components/GameOver';
+import { useLocation } from 'react-router-dom';
+import Question from './components/Question';
+import { Buffer } from "buffer";
 
 export const AppContext = createContext();
 
@@ -15,10 +18,20 @@ function App() {
   const [gameOver, setGameOver] = useState({gameOver: false, guessedWord: false});
   const [correctWord, setCorrectWord] = useState("");
 
+  const useQuery= () => {
+    return new URLSearchParams(useLocation().search);
+  }
+  let query = useQuery();
+  const askedWord = query.get('q');
+  const decodedAskedWord = Buffer.from(askedWord, 'base64').toString();
+
   useEffect(() => {
     generateWordSet().then((words) => {
       setWordSet(words.wordSet);
-      setCorrectWord(words.todaysWord.toLocaleUpperCase('TR'));
+      if (decodedAskedWord) {
+        setCorrectWord(decodedAskedWord.toLocaleUpperCase('TR'));
+      }
+      //setCorrectWord(words.todaysWord.toLocaleUpperCase('TR'));
     });
   }, []);
 
@@ -85,8 +98,17 @@ function App() {
                 disabledLetters, setDisabledLetters,
                 gameOver, setGameOver}}>
         <div className='game'>
-          <Board />
-          {gameOver.gameOver ? <GameOver /> : <Keyboard />}
+          {
+            decodedAskedWord ? 
+              <>
+                <Board />
+                {gameOver.gameOver ? <GameOver /> : <Keyboard />}
+              </>
+              :
+              <>
+                <Question />
+              </>
+          }
         </div>
       </AppContext.Provider>
     </div>
