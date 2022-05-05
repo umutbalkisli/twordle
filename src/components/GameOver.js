@@ -6,9 +6,11 @@ function GameOver() {
 
     return (
         <div className='gameOver'>
-            <h3>{gameOver.guessedWord ? "You won" : "You lost"}</h3>
-            <h1>Corret word was {correctWord}</h1>
-            {gameOver.guessedWord && (<h3>You guessed in {currentAttempt.attempt} attempts</h3>)}
+            <div>{gameOver.guessedWord ? "Tebrikler!" : "Üzgünüm :("}</div>
+            <div>
+                <span>Doğru kelime <strong>{correctWord}</strong></span>
+            </div>
+            {gameOver.guessedWord && (<div><strong>{currentAttempt.attempt}</strong> denemede bildiniz</div>)}
         </div>
     );
 }

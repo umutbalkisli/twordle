@@ -11,7 +11,7 @@ function Letter({letterPosition, attemptValue}) {
     
     let letterState = "";
     if (currentAttempt.attempt > attemptValue) {
-        letterState = correct ? "correct" : almost ? "almost" : "error";
+        letterState = correct ? "tile-correct dance" : almost ? "tile-wrong-location shake" : "tile-wrong shake";
     }
 
     useEffect(() => {
@@ -21,7 +21,7 @@ function Letter({letterPosition, attemptValue}) {
     }, [currentAttempt.attempt]);
 
     return (
-        <div className='letter' id={letterState}> {/* ids: correct, almost, error */}
+        <div className={'tile ' + letterState}>
             {letter}
         </div>
     )

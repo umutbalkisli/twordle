@@ -18,20 +18,19 @@ function App() {
   const [gameOver, setGameOver] = useState({gameOver: false, guessedWord: false});
   const [correctWord, setCorrectWord] = useState("");
 
-  const useQuery= () => {
+  const useQuery = () => {
     return new URLSearchParams(useLocation().search);
   }
   let query = useQuery();
   const askedWord = query.get('q');
-  const decodedAskedWord = Buffer.from(askedWord, 'base64').toString();
 
   useEffect(() => {
     generateWordSet().then((words) => {
       setWordSet(words.wordSet);
-      if (decodedAskedWord) {
+      if (askedWord) {
+        const decodedAskedWord = Buffer.from(askedWord, 'base64').toString();
         setCorrectWord(decodedAskedWord.toLocaleUpperCase('TR'));
       }
-      //setCorrectWord(words.todaysWord.toLocaleUpperCase('TR'));
     });
   }, []);
 
@@ -71,7 +70,8 @@ function App() {
       setCurrentAttempt({attempt: currentAttempt.attempt + 1, letterPosition: 0});
     }
     else {
-      alert("Word does not exists");
+      alert("Kelime bulunamadı!");
+      return;
     }
 
     if(currentWord === correctWord) {
@@ -86,32 +86,33 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <nav>
-        <h1>Twordle</h1>
-      </nav>
-      <AppContext.Provider
-        value={{board, setBoard,
-                currentAttempt, setCurrentAttempt,
-                onSelectLetter, onDelete, onEnter,
-                correctWord,
-                disabledLetters, setDisabledLetters,
-                gameOver, setGameOver}}>
-        <div className='game'>
-          {
-            decodedAskedWord ? 
-              <>
-                <Board />
-                {gameOver.gameOver ? <GameOver /> : <Keyboard />}
-              </>
-              :
-              <>
-                <Question />
-              </>
-          }
-        </div>
-      </AppContext.Provider>
-    </div>
+    <>
+      <h1>Twordle</h1>
+      <div className="App">
+        <AppContext.Provider
+          value={{board, setBoard,
+                  currentAttempt, setCurrentAttempt,
+                  onSelectLetter, onDelete, onEnter,
+                  correctWord,
+                  disabledLetters, setDisabledLetters,
+                  gameOver, setGameOver,
+                  wordSet, setWordSet}}>
+          <div className='game'>
+            {
+              askedWord ? 
+                <>
+                  <Board />
+                  {gameOver.gameOver ? <GameOver /> : <Keyboard />}
+                </>
+                :
+                <>
+                  <Question />
+                </>
+            }
+          </div>
+        </AppContext.Provider>
+      </div>
+    </>
   );
 }
 
