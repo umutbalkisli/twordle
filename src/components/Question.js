@@ -35,7 +35,7 @@ function Question() {
                 <label>Arkadaşlarına bir kelime sor</label>
             </div>
             <div>
-                <input type="text" name="wordInput" className="input-text" value={wordInput} onInput={e => setWordInput(e.target.value)} />
+                <input type="text" maxLength='5' name="wordInput" className="input-text" value={wordInput} onInput={e => setWordInput(e.target.value)} />
             </div>
             <div className="btn" id="button-7" onClick={generateLink}>
                 <div id="dub-arrow"><img src={process.env.PUBLIC_URL + '/arrow-48-240.png'} alt="arrow" /></div>
