@@ -17,6 +17,7 @@ function App() {
   const [disabledLetters, setDisabledLetters] = useState([]);
   const [gameOver, setGameOver] = useState({gameOver: false, guessedWord: false});
   const [correctWord, setCorrectWord] = useState("");
+  const [stat, setStat] = useState([]);
 
   const useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -74,6 +75,17 @@ function App() {
       return;
     }
 
+    let newRowStat = '';
+    for (let i = 0; i < currentWord.length; i++) {
+      const correct = correctWord[i] === currentWord[i];
+      const almost = !correct && currentWord[i] !== "" && correctWord.includes(currentWord[i]);
+
+      newRowStat += correct ? "🟩" : almost ? "🟨" : "⬜";
+    }
+    let newStat = [...stat];
+    newStat.push(newRowStat);
+    setStat(newStat);
+
     if(currentWord === correctWord) {
       setGameOver({gameOver: true, guessedWord: true});
       return;
@@ -98,7 +110,8 @@ function App() {
                   correctWord,
                   disabledLetters, setDisabledLetters,
                   gameOver, setGameOver,
-                  wordSet, setWordSet}}>
+                  wordSet, setWordSet,
+                  stat, setStat}}>
           <div className='game'>
             {
               askedWord ? 

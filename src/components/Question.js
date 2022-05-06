@@ -36,11 +36,9 @@ function Question() {
             <div>
                 <input type="text" name="wordInput" className="input-text" value={wordInput} onInput={e => setWordInput(e.target.value)} />
             </div>
-            <div>
-                <div class="btn" id="button-7" onClick={generateLink}>
-                    <div id="dub-arrow"><img src={process.env.PUBLIC_URL + '/arrow-48-240.png'} alt="arrow" /></div>
-                    <a href='#'>Paylaş</a>
-                </div>
+            <div className="btn" id="button-7" onClick={generateLink}>
+                <div id="dub-arrow"><img src={process.env.PUBLIC_URL + '/arrow-48-240.png'} alt="arrow" /></div>
+                <a href='#'>Paylaş</a>
             </div>
         </>
     );
