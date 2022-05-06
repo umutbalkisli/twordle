@@ -289,3 +289,8 @@ body {
   transition: box-shadow var(--transitionDuration);
   margin-top: .5em;
 }
+
+.title {
+  text-decoration: none;
+  color: inherit;
+}

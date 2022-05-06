@@ -6,7 +6,7 @@ function Question() {
     const [wordInput, setWordInput] = useState('');
     const { wordSet } = useContext(AppContext);
 
-    const generateLink = (e) => {
+    const generateLink = async (e) => {
         e.preventDefault();
 
         if (!wordInput || wordInput.length != 5) {
@@ -17,9 +17,10 @@ function Question() {
         if (wordSet.has(wordInput.toLocaleLowerCase('tr'))) {
             const encodedString = Buffer.from(wordInput).toString('base64');
             const urlToShare = window.location.href + '?q=' + encodedString;
-    
-            navigator.clipboard.writeText(urlToShare);
-            alert('Oyun linki kopyalandı. Sorunuzu arkadaşlarınızla paylaşabilirsiniz.');
+
+            await navigator.clipboard.writeText(urlToShare);
+            
+            alert('Oyun linki kopyalandı.\n\n' + urlToShare + '\n\nSorunuzu arkadaşlarınızla paylaşabilirsiniz.');
         }
         else {
             alert("Kelime bulunamadı!");

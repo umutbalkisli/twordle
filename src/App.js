@@ -87,7 +87,9 @@ function App() {
 
   return (
     <>
-      <h1>Twordle</h1>
+      <a href='/' className='title'>
+        <h1>Twordle</h1>
+      </a>
       <div className="App">
         <AppContext.Provider
           value={{board, setBoard,
