@@ -7,7 +7,7 @@ function GameOver() {
     const shareResult = async (e) => {
         e.preventDefault();
 
-        let content = 'Twordle ' + currentAttempt.attempt + '/6\n';
+        let content = 'Twordle ' + (gameOver.guessedWord ? currentAttempt.attempt : 'X') + '/6\n';
         stat.forEach(item => {
             content += item + '\n';
         });
