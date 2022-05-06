@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Buffer } from "buffer";
 import { AppContext } from "../App";
+import { encodingKey } from "../Words";
 
 function Question() {
     const [wordInput, setWordInput] = useState('');
@@ -15,7 +16,7 @@ function Question() {
         }
 
         if (wordSet.has(wordInput.toLocaleLowerCase('tr'))) {
-            const encodedString = Buffer.from(wordInput).toString('base64');
+            const encodedString = Buffer.from(encodingKey + wordInput).toString('base64');
             const urlToShare = window.location.href + '?q=' + encodedString;
 
             await navigator.clipboard.writeText(urlToShare);

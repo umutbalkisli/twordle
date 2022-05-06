@@ -9,3 +9,5 @@ export const generateWordSet = async () => {
 
     return { wordSet, todaysWord };
 }
+
+export const encodingKey = '_1vBajKs03MmF9m1cgk(';

@@ -2,7 +2,7 @@ import './App.css';
 import Board from './components/Board';
 import Keyboard from './components/Keyboard';
 import { createContext, useEffect, useState } from 'react';
-import { boardDefault, generateWordSet } from './Words';
+import { boardDefault, encodingKey, generateWordSet } from './Words';
 import GameOver from './components/GameOver';
 import { useLocation } from 'react-router-dom';
 import Question from './components/Question';
@@ -29,7 +29,8 @@ function App() {
     generateWordSet().then((words) => {
       setWordSet(words.wordSet);
       if (askedWord) {
-        const decodedAskedWord = Buffer.from(askedWord, 'base64').toString();
+        let decodedAskedWord = Buffer.from(askedWord, 'base64').toString();
+        decodedAskedWord = decodedAskedWord.replace(encodingKey, '');
         setCorrectWord(decodedAskedWord.toLocaleUpperCase('TR'));
       }
     });
