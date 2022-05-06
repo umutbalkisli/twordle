@@ -3,9 +3,9 @@ import { AppContext } from '../App'
 import Key from './Key'
 
 function Keyboard() {
-    const keys1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "Ğ", "Ü"]
+    const keys1 = ["E", "R", "T", "Y", "U", "I", "O", "P", "Ğ", "Ü"]
     const keys2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L", "Ş", "İ"]
-    const keys3 = ["Z", "X", "C", "V", "B", "N", "M", "Ö", "Ç"]
+    const keys3 = ["Z", "C", "V", "B", "N", "M", "Ö", "Ç"]
 
     const {onEnter, onDelete, onSelectLetter, disabledLetters, currentAttempt} = useContext(AppContext);
 
@@ -48,6 +48,7 @@ function Keyboard() {
             {keys1.map((key) => {
                 return <Key key={key} keyValue={key} disabled={disabledLetters.includes(key)} />;
             })}
+            <div className='key hidden'></div>
             <div className="space"></div>
             {keys2.map((key) => {
                 return <Key key={key} keyValue={key} disabled={disabledLetters.includes(key)} />;

@@ -25,7 +25,7 @@ body {
 
 .keyboard {
   display: grid;
-  grid-template-columns: repeat(24, minmax(auto, 1.25em));
+  grid-template-columns: repeat(23, minmax(auto, 1.25em));
   grid-auto-rows: 3em;
   gap: 0.25em;
   justify-content: center;
@@ -293,4 +293,8 @@ body {
 .title {
   text-decoration: none;
   color: inherit;
+}
+
+.key.hidden {
+  visibility: hidden;
 }
