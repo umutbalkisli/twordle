@@ -30,7 +30,7 @@ function Question() {
     return(
         <>
             <div>
-                <label>Arkadaşına bir kelime hazırla</label>
+                <label>Arkadaşlarına bir kelime sor</label>
             </div>
             <div>
                 <input type="text" name="wordInput" className="input-text" value={wordInput} onInput={e => setWordInput(e.target.value)} />
