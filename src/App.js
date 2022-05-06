@@ -87,7 +87,7 @@ function App() {
 
   return (
     <>
-      <a href='/' className='title'>
+      <a href='/twordle' className='title'>
         <h1>Twordle</h1>
       </a>
       <div className="App">
